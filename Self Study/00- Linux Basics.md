@@ -51,38 +51,6 @@ addgroup devteam # Create New Group
 usermod -aG devteam testuser # Add a User to the New Group
 ```
 
-### Permissions:
-```bash
-ls -l # Show file & directory permissions
--rw-r--r-- 1 user group 1234 Jul 13 14:00 example.txt
-
-sudo chown user:group filename # Change file's owner
-
-chmod u+x filename     # Set execution permision for User Owner
-chmod g-w filename     # Remove Write permission for Group
-chmod o=r filename     # Set just Read-only permission for Others
-```
-
-#### Permissions in Numeric mode:
-
-* `rwx` : 7
-* `rw-` : 6
-* `r-x` : 5
-* `r--` : 4
-* `-wx` : 3
-* `-w-` : 2
-* `--r` : 1
-* `---` : 0
-
-```bash
-# Examples:
-chmod 755 script1.sh  # rwxr-xr-x
-chmod 644 notes.txt    # rw-r--r--
-```
-```bash
-chmod -R 755 dir1/ # Set permission recursive.
-```
-
 ## Services & Boot Process Management with Systemd
 
 ### systemd:
@@ -242,6 +210,7 @@ find . -size +10M # Search with size
 find . -size -100k
 find . -mtime +7 # Search with modify time (Days)
 find . -mtime -3
+find / -perm -4000 -print # Fine all files with SUID permission.
 ```
 
 ### Using -exec in Find:
@@ -378,6 +347,15 @@ ls -l /usr/bin/passwd
 ```
 ```bash
 chmod u+s file # Set SUID 
+```
+```sh
+# Find all files with SUID permission:
+find / -perm -4000 -print
+find / -user root -perm -4000 -exec ls -ldb {} \; > /tmp/ckperm
+cat ckperm
+
+# Find all SGID files:
+find / -perm -2000 -print 
 ```
 
 #### Set Group ID:

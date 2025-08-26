@@ -8,8 +8,8 @@
 * Services : nginx, sshd, mysqld
 * Filtering:
   * sshd : severity ≤ err (3)
-  * mysqld : everity ≤ warning (4)
-  * nginx : everity ≤ warning (4)
+  * mysqld : severity ≤ warning (4)
+  * nginx : severity ≤ warning (4)
 * Log Server Path : `/var/log/remote/<host>/<service>.log`
 * Dynamic pattern for saving structure on rsyslog:
   * /var/log/remote/%HOSTNAME%/%PROGRAMNAME%.log
@@ -22,7 +22,7 @@
   * sshd : Daily, compress, size 50M, rotate 7
   * nginx : Daily, compress, size 100M, rotate 14
   * mysqld : Daily, compress, size 200M, rotate 30
-* NFS Arching:
+* NFS Archiving:
   * Postrotate script : Move from `log.2.gz.*` and older to `/mnt/log-archive/<host>/` , Keep 2 days logs
 * Security & Permissions: syslog:adm, 0750 permission
 
@@ -139,7 +139,7 @@ logger -p auth.err "TEST-SSH-ERR from $(hostname)"
 ```sh
 # Install & Enable NFS Service:
 apt update
-apt install -y nfs-kernel-server
+apt install nfs-kernel-server -y
 mkdir -p /srv/log-archive
 chown -R syslog:adm /srv/log-archive
 echo '/srv/log-archive 192.168.1.100(rw,sync,no_subtree_check,root_squash)' | tee -a /etc/exports

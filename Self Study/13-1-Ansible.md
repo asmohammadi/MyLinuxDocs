@@ -128,8 +128,6 @@ become_user = root
 * Avoids repeating CLI options (-i, -u, etc.)
 * Ensures consistent behavior across team members or scripts
 
-## Ansible Playbook:
-
 
 
 

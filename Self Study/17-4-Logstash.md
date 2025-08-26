@@ -72,7 +72,7 @@ input {
 
   # Metricbeat
   beats {
-    port => 5045
+    port => 5044
     ssl => true
     ssl_certificate => "/etc/logstash/certs/logstash.crt"
     ssl_key => "/etc/logstash/certs/logstash.key"
@@ -80,7 +80,7 @@ input {
 
   # Packetbeat
   beats {
-    port => 5046
+    port => 5044
     ssl => true
     ssl_certificate => "/etc/logstash/certs/logstash.crt"
     ssl_key => "/etc/logstash/certs/logstash.key"

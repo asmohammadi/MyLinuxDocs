@@ -39,7 +39,7 @@ docker pull localhost:5000/mynginx
 docker pull 192.168.1.10:5000/mynginx
 ```
 
-### Insecure Registry:
+### Insecure Private Registry:
 > Local registry without SSL
 > For using `Local Registry` without SSL need to create or edit json file in `/etc/docker/daemon.json`.
 

@@ -49,7 +49,7 @@ docker run -d \
   --log-opt max-size=10m \
   --log-opt max-file=3 \
   nginx
-# Maximum 3 log files & each file 10Mb size 
+# Maximum 3 log files & each file 10Mb size in Json format
 ```
 
 ### 4. Isolation of containers:
