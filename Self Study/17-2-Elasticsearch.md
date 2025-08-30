@@ -97,6 +97,32 @@ curl -u elastic:<ElasticPassword> -X POST "https://localhost:9200/_security/user
   --cacert /etc/elasticsearch/certs/http_ca.crt
 ```
 
+### Join nodes to ELK using TLS:
+```sh
+# CREATING CA:
+/usr/share/elasticsearch/bin/elasticsearch-certutil ca -pem -out /root/transport-ca.zip -d /root/transport-ca
+
+# Creates a CA (PEM, no password) 
+
+# MASTER 1:
+/usr/share/elasticsearch/bin/elasticsearch-certutil cert \
+-ca-cert /root/transport-ca/ca/ca.crt \
+-ca-key /root/transport-ca/ca/ca.key \
+-name elk-master-1 \
+--dns elk-master-1 \
+-ip 192.168.30.11 \
+-out /root/elk-master-1.zip
+
+# Generates a certificate for Master 1 
+
+# MASTER 1 ELASTICSEARCH.YML:
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.certificate: /root/transport-ca/ca/ca.crt
+xpack.security.transport.ssl.key: /root/transport-ca/ca/ca.key
+xpack.security.transport.ssl.certificate_authorities:
+  - /root/transport-ca/ca/ca.crt
+```
 
 
 
