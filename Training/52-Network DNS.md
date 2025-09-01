@@ -1,5 +1,18 @@
 # 52-Network DNS
 
+### resolv.conf:
+```sh
+/etc/resolv.conf # Temporary Name Server
+systemctl status systemd-resolve # Show current Name Servers
+# Make resolv.conf permanent:
+apt install resolvconf
+systemctl disable systemd-resolve.service # Disable service
+systemctl stop systemd-resolve.service # Stop service
+nano /etc/resolvconf/resolve.conf.d/base # Add Name Servers
+resolvconf -u # Update service
+# After reboot the "/etc/resolv.conf" will be permanent.
+```
+
 **dig:**
 > `Dig` (Domain Information Groper) is a command-line tool for querying DNS name servers.
 > `Dig` will query from `/etc/resolv.conf`.
