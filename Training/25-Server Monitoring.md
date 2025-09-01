@@ -339,6 +339,7 @@ iftop # Live Network Monitoring Tool.
 **nload:**
 ```bash
 nload # Show Interface Send & Receive.
+nload -m # Display all Interfaces
 ```
 **iptraf-ng:**
 ```bash
