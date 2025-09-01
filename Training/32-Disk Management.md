@@ -78,6 +78,7 @@ root@server:~# blkid
 /dev/sdb1: PARTUUID="6b7aef3c-01"
 /dev/sda1: PARTUUID="f5078db8-2151-44f2-8ebf-8f853a431046"
 ```
+### SWAP:
 
 **mkswap:**
 > `Mkswap` will make Swap space. First need to create a Swap Partition with type 82 (Linux Swap).
@@ -90,6 +91,13 @@ root@ubuntu16-1:/# mkswap /dev/sdb1
 mkswap: /dev/sdb1: warning: wiping old ext3 signature.
 Setting up swapspace version 1, size = 20 GiB (21473783808 bytes)
 no label, UUID=0dcd7e90-4b45-4d5f-808c-320f1e5ba8a3
+```
+
+**fallocate:**
+```sh
+fallocate -l 2G /swap # Allocate a disk space for Swap file
+mkswap /swap # Make Swap FileSystem
+swapon /swap # Enable Swap
 ```
 
 #### Mounting created partitions:
