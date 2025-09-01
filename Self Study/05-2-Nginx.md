@@ -9,33 +9,6 @@
 * `/etc/nginx/sites-enabled/` : Symbolic Links
 * `/var/log/nginx/error.log` : Error Logs
 
-### Nginx Simple Configuration:
-```sh
-user nginx;
-worker processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-event {
-    worker_connections 2048;
-}
-http {
-    server {
-        listen      8080;
-        location / {
-                error_log /var/log/nginx/error_root.log;
-                access_log /var/log/nginx/access_root.log;
-                root    /var/www/nginx ;
-        }
-        location /images {
-                error_log /var/log/nginx/error_images.log;
-                access_log /var/log/nginx/access_images.log;
-                root    /var/www/nginx ;
-        }
-    }
-}
-```
-
 **Scenario:**
 * `Apache` : test1.local
 * `Nginx` : test2.local:8080
