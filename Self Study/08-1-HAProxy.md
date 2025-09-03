@@ -2,8 +2,10 @@
 
 
 ### Scenario:
+* 1 HaProxy Server
+* 3 Web Servers
 * HAProxy Server: Docker Container (CentOS)
-  * Local Port: 8085
+  * Local Port: 80
   * Container port: 80
   * Load balance method: Roundrobin
 * Web Server 1: Docker Container (Nginx)
