@@ -18,7 +18,7 @@ DEAMON_ARGS="--vrrp"
 
 ### Keepalived Configuration:
 ```sh
-# On bot Keepalived Servers:
+# On both Keepalived Servers:
 # Edit config file:
 nano /etc/keepalived/keepalived.conf
 # Configuration On MASTER Keepalived Server:

@@ -21,7 +21,7 @@
 ### HaProxy Server Load Balancing Solutions:
 1. `Active / Passive` : Using Floating IP (Set health check on HaProxy Servers)
 2. `Active / Active` : Using DNS Records referred to HaProxy Servers (Set health check on DNS records) 
-3. `Keepalived`
+3. `Keepalived` : Using VRRP protocol
 
 
 

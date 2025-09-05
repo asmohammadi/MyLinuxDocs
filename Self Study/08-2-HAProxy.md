@@ -72,6 +72,7 @@ listen h3_quic_proxy
 * HAProxy Server: Docker Container (CentOS)
   * Local Port: 80
   * Container port: 80
+  * HaProxy Dashboard port: 1936
   * Load balance method: Roundrobin
 * Web Server 1: Docker Container (Nginx)
   * Local Port: 8081
