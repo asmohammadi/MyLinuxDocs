@@ -2,8 +2,12 @@
 
 ### Create Certificate Keys (General & Public) on Client:
 
+**On Windows Client:**
 ```powershell
 ssh-keygen -t rsa -b 4096 -C "root@ubuntu24.04"
+# or
+ssh-keygen -t ed25519 -C "email@example.com" # More safe algorithm
+
 Default Path: C:\Users\UserName\.ssh\id_rsa # For changing the name of file put the Path & Name.
 Enter Passphrase: # Enter for No Passphrase.
 ```
@@ -12,11 +16,30 @@ Enter Passphrase: # Enter for No Passphrase.
 * `-f` : File Name
 * `-C` : Comment
 
+**On Linux Client:**
+```sh
+ssh-keygen -t rsa -b 4096 -C "email@example.com"
+# or
+# Private Key:
+openssl genpkey -algorithm RSA -out id_rsa -aes256 -pkeyopt rsa_keygen_bits:4096
+# Extract Public Key:
+openssl rsa -pubout -in id_rsa -out id_rsa.pub
+# or
+# Private Key:
+openssl genpkey -algorithm ED25519 -out id_ed25519.pem
+# Extract Public Key:
+openssl pkey -in id_ed25519.pem -pubout -out id_ed25519.pub
+
+# Convert OpenSSL PEM to authorized_keys for using in SSH:
+ssh-keygen -y -f id_rsa > id_rsa_ssh.pub
+ssh-keygen -y -f id_ed25519.pem > id_ed25519_ssh.pub
+```
+
 ```powershell
 PS C:\Users\Asghar> ssh-keygen -t rsa -b 4096 -C "root@ubuntu24.04"
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\Asghar/.ssh/id_rsa):
-Created directory 'C:\\Users\\Asghar/.ssh'.
+Created directory 'C:\Users\Asghar/.ssh'.
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 Your identification has been saved in C:\Users\Asghar/.ssh/id_rsa

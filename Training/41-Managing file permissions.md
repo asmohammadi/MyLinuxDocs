@@ -41,23 +41,23 @@ chgrp root dir1/ # Change the Group
 
 > If set `sticky bit` for a directory, it permits only the owning user or the superuser (root) to delete or unlink a file. 
 
-| access mode    | ** on file**                            | **on directory**                             |
+| access mode    | **on file**                             | **on directory**                             |
 | -------------- | --------------------------------------- | -------------------------------------------- |
 | **SUID**       | executes with permissions of file owner | nothing                                      |
-| **GUID**       | executes with the permissions of group  | new files have group membership of directory |
+| **SGID**       | executes with the permissions of group  | new files have group membership of directory |
 | **Sticky Bit** | nothing                                 | only owner can delete files                  |
 
 | Access Mode   | octal |
 | ------------- | ----- |
 | **SUID**      | 4000  |
-| **GUID**      | 2000  |
+| **SGID**      | 2000  |
 | **StickyBit** | 1000  |
 
-* `s` : SUID
-* `s` : GUID
-* `t` : Sticky Bit
-* `S` : File or Directory does not have Execute permission (For User & Group)
-* `T` : File or Directory does not have Execute permission (For Others)
+* `s` : SUID with Execute permission
+* `s` : SGID with Execute permission
+* `t` : Sticky Bit with Execute permission
+* `S` : File or Directory has no Execute permission (For User & Group)
+* `T` : File or Directory has no Execute permission (For Others)
 
 > If the file or directory is already executable **`s`** and **`t`** would be displayed after setting access modes. 
 

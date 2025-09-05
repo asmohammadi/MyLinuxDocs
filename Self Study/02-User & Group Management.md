@@ -68,10 +68,23 @@ w # Display current logged-in users & their current activity
 cat /var/log/auth.log | grep sudo # Display sudo logs
 ```
 
-
-
-
-
+### Disable a User:
+```sh
+# Lock user:
+usermod -L username
+passwd -l username
+# But still can use SSH with Key:
+# Lock with changing Bash:
+usermod -s /usr/sbin/nologin username
+usermod -s /bin/false username
+# Lock full account:
+usermod -L -s /usr/sbin/nologin username
+# Expire the user:
+usermod -e 1 username # Set expire date to before
+## Unlock the User:
+usermod -U username
+usermod -s /bin/bash username
+```
 
 
 

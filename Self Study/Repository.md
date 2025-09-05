@@ -1,5 +1,17 @@
 # Repository:
 
+
+**Structure of Repositories:**
+```
+deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
+```
+* `deb` : Type of repository
+* `URL` : Server of the repository
+* `focal` : Distribution (Ubuntu 20.04)
+* `main restricted universe multiverse` : Sections
+
+> Any changes to Repositories Lists need `apt update` command.
+
 ### Change Repository:
 ```sh
 sed -i 's|http://ir.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources

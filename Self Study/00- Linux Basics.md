@@ -5,19 +5,19 @@
 ### FileSystem Hierarchy:
 
 - `/`	            => Filesystem Root
-- `/bin`	        => دستورات اجرایی پایه (مثل ls, cp, mv)
-- `/sbin`	        => دستورات اجرایی برای مدیر سیستم (مثل reboot, iptables)
-- `/etc`	        => فایل‌های پیکربندی سیستم (Configuration Files)
-- `/home`	        => پوشه‌ی Home کاربران 
-- `/root`	        => پوشه‌ی Home کاربر root
-- `/var`	        => فایل‌های متغیر مثل لاگ‌ها، صف پرینت، کش‌ها
-- `/usr`	        => نرم‌افزارهای نصب‌شده توسط کاربر و فایل‌های share شده
+- `/bin`	        => Basic commands (ls, cp, mv)
+- `/sbin`	        => Administrative commands (reboot, iptables)
+- `/etc`	        => Configuration Files
+- `/home`	        => Home directory of users
+- `/root`	        => Home directory of Root
+- `/var`	        => Variable files (Caches, print spool, logs)
+- `/usr`	        => Users installed apps & Shared files
 - `/tmp`	        => Temporary Files
-- `/dev`	        => فایل‌های دستگاه (Device Files  مثل sda, tty)
-- `/proc`	        => اطلاعات لحظه‌ای از کرنل و پردازش‌ها (Virtual Filesystem)
-- `/sys`	        => اطلاعات و تنظیمات سخت‌افزاری سیستم
-- `/opt`	        => محل نصب نرم‌افزارهای third-party (مثلاً Chrome)
-- `/media` `/mnt`	=> Mountpoint برای External Device ها (USB, CD, etc.)
+- `/dev`	        => Devices files (sda, tty)
+- `/proc`	        => Kernel & process information (Virtual Filesystem)
+- `/sys`	        => System Hardware information & settings
+- `/opt`	        => Third-party applications (Chrome)
+- `/media` `/mnt`	=> MountPoint for External Devices (USB, CD, etc.)
 
 
 ### Basic commands:
@@ -184,12 +184,11 @@ apt autoremove # Remove dependent files.
 ```
 ```bash
 # Troubleshoot:
-Could not get lock /var/lib/dpkg/lock-frontend
+Error: Could not get lock /var/lib/dpkg/lock-frontend
 # Solution:
 rm /var/lib/dpkg/lock-frontend
 dpkg --configure -a # Reconfigure the package
-```
-```bash
+
 apt install -f # Fix broken dependencies
 ```
 
@@ -210,7 +209,7 @@ find . -size +10M # Search with size
 find . -size -100k
 find . -mtime +7 # Search with modify time (Days)
 find . -mtime -3
-find / -perm -4000 -print # Fine all files with SUID permission.
+find / -perm -4000 -print # Find all files with SUID permission.
 ```
 
 ### Using -exec in Find:
@@ -253,7 +252,7 @@ ls -l # Show file & directory permissions
 
 sudo chown user:group filename # Change file's owner
 
-chmod u+x filename     # Set execution permision for User Owner
+chmod u+x filename     # Set execution permission for User Owner
 chmod g-w filename     # Remove Write permission for Group
 chmod o=r filename     # Set just Read-only permission for Others
 ```
@@ -266,7 +265,7 @@ chmod o=r filename     # Set just Read-only permission for Others
 * `r--` : 4
 * `-wx` : 3
 * `-w-` : 2
-* `--r` : 1
+* `--x` : 1
 * `---` : 0
 
 ```bash
@@ -310,7 +309,7 @@ chown -R asghar:admins /var/www/ # Change Owner & Group Recursive
 
 ### Default permission & Umask:
 
-> `umask` will specify the default permissions for new Files & Directories.
+> `umask` will specify the default permissions for new created Files & Directories.
 * `File` : 666 (rw-rw-rw-)
 * `Dir`  : 777 (rwxrwxrwx)
 
@@ -360,14 +359,11 @@ find / -perm -2000 -print
 
 #### Set Group ID:
 
-> On executive file, it will run with the permission of the Group Owner of the file.
+* On executive file, it will run with the permission of the Group Owner of the file.
+* All files & directories created under a directory with `SGID` permission, will get the membership of the Group Owner of the directory.
 ```bash
 chmod g+s myscript.sh
-```
-
-> All files & directories created under a directory with `SGID` permission, will get the membership of the Group Owner of the directory.
-
-```bash
+# Share a directory:
 mkdir /shared
 chown root:admins /shared
 chmod g+s /shared # All new created files' Group Owner will be admins Group.
@@ -375,8 +371,8 @@ chmod g+s /shared # All new created files' Group Owner will be admins Group.
 
 #### Sticky Bit:
 
-> Only for Directories.
-> Only the Owner of the files can delete them, even if others have the read/write permissions.
+* Only for Directories.
+* Only the Owner of the files can delete them, even if others have the read/write permissions.
 
 ```bash
 # Example:
