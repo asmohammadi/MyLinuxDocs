@@ -73,26 +73,6 @@ server {
 * Redirect port 443 to 8443
 
 ```bash
-# Redirect Http(80) to https://test3.local:8443
-server {
-    listen 80;
-    server_name test3.local;
-
-    return 301 https://$host:8443$request_uri;
-}
-
-# Redirect Https(443) to https://test3.local:8443
-server {
-    listen 443 ssl;
-    server_name test3.local;
-
-    ssl_certificate     /etc/ssl/certs/test3.local.crt;
-    ssl_certificate_key /etc/ssl/private/test3.local.key;
-    ssl_trusted_certificate /etc/ssl/certs/test3.local.ca-bundle.crt;
-
-    return 301 https://$host:8443$request_uri;
-}
-
 # VirtualHost with 8443:
 server {
     listen 8443 ssl;
@@ -112,6 +92,26 @@ server {
         try_files $uri $uri/ =404;
     }
 }
+
+# Redirect Http(80) to https://test3.local:8443
+server {
+    listen 80;
+    server_name test3.local;
+
+    return 301 https://$host:8443$request_uri;
+}
+
+# Redirect Https(443) to https://test3.local:8443
+server {
+    listen 443 ssl;
+    server_name test3.local;
+
+    ssl_certificate     /etc/ssl/certs/test3.local.crt;
+    ssl_certificate_key /etc/ssl/private/test3.local.key;
+    ssl_trusted_certificate /etc/ssl/certs/test3.local.ca-bundle.crt;
+
+    return 301 https://$host:8443$request_uri;
+}
 ```
 
 ### Redirect 80 to 443 & Redirect path with Real SSL:
@@ -129,7 +129,7 @@ server {
     listen 443 ssl;
     server_name site1.example.com;
 
-        ssl_certificate     /etc/ssl/certs/site1.example.com.crt;
+    ssl_certificate     /etc/ssl/certs/site1.example.com.crt;
     ssl_certificate_key /etc/ssl/private/site1.example.com.key;
 
     ssl_protocols TLSv1.2 TLSv1.3;

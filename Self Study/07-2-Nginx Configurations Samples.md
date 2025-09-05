@@ -1,6 +1,6 @@
 # Nginx Configurations Samples
 
-### Nginx Simple Configuration:
+### Nginx Configuration Example 1:
 ```sh
 user nginx;
 worker processes auto;
@@ -27,7 +27,7 @@ http {
 }
 ```
 
-### Nginx Configuration Sample:
+### Nginx Configuration Example 2:
 
 ```sh
 user nginx;
@@ -48,7 +48,7 @@ http {
                 root    /var/www/nginx ;
         }
         # Limit directory to these formats
-        location ~ \.(mp3|mp4) { # Files like ".mp3" or ".mp4"
+        location ~ \.(mp3) { # Files like ".mp3"
                 error_log /var/log/nginx/error_audio.log;
                 access_log /var/log/nginx/access_audio.log;
                 root    /var/www/media/audio ;

@@ -41,8 +41,8 @@ ln -s /etc/nginx/sites-available/test2.local /etc/nginx/sites-enabled/
 # Test Nginx configuration:
 nginx -t
 
-# Restart Nginx
-systemctl restart nginx
+# Reload Nginx
+systemctl reload nginx
 ```
 
 #### Nginx Errors:
@@ -59,7 +59,7 @@ nginx -c /etc/nginx/nginx.conf -t # Test Nginx configuration
 systemctl status nginx # Check the service
 systemctl reload nginx # Read configuration again and run it (Without changing PID of workers)
 systemctl restart nginx # Will kill the worker process & start it again
-journalctl -xeu nginx # See details of problem if there is a problem
+journalctl -xeu nginx # See details of problem if there is a problem (Recently logs)
 ```
 
 **Nginx Logs:**
@@ -127,7 +127,7 @@ server {
     ssl_trusted_certificate /etc/ssl/certs/test3.local.ca-bundle.crt;
 
     location / {
-        proxy_pass http://127.0.0.1:8080;
+        proxy_pass https://127.0.0.1:8443;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
