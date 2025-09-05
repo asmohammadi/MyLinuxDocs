@@ -22,6 +22,7 @@ iptables -A INPUT -p tcp --dport 23 -j DROP # Any connection to port 23 will dro
 iptables -D INPUT 2 # Delete a firewall rule with Rule Number.
 iptables -F # Delete all firewall rules.
 iptables -A INPUT -s 1.2.3.4 -j DROP # Drop IP Address
+
 iptables -A INPUT -s 192.168.1.0/24 -j DROP # Drop IP Range
 iptables -A INPUT -s 1.2.3.4 -j ACCEPT # Accept IP Address
 iptables -A INPUT -j DROP # Accept just the IP above
@@ -74,7 +75,7 @@ wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh && sh /
 http://your_server_ip:19999
 ```
 
-**Netdata COnfiguration:**
+**Netdata Configuration:**
 > `/etc/netdata/netdata.conf`
 ```bash
 chown netdata /etc/netdata/ssl/private.key

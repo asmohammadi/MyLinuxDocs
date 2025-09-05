@@ -54,7 +54,6 @@ tar -xzvf /backup/data-backup-2025-07-19.tar.gz -C /restore/location/
 mkdir -p /backup/sync /backup/archive /backup/logs
 chmod +x backup.sh
 ```
-
 ```bash
 #!/bin/bash
 
@@ -79,7 +78,7 @@ echo "Backup completed in $TODAY ✅"
 ### Cron:
 
 ```bash
-sudo crontab -e # Edit crontab
+crontab -e # Edit crontab
 # Add this line:
 0 2 * * * /path/to/backup.sh # Run Every day at 02:00 AM.
 ```
