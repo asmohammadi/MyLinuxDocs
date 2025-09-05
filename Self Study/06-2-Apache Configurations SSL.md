@@ -103,10 +103,9 @@ systemctl reload apache2
 ```
 ```bash
 # Test & Enable ssl module:
+a2enmod ssl
 apache2ctl configtest
 systemctl reload apache2
-a2enmod ssl
-systemctl restart apache2
 ```
 
 

@@ -73,12 +73,13 @@ systemctl reload apache2 # Needed after enabling virtual host
 ```bash
 a2ensite test1.local.conf
 a2ensite test2.local.conf
+# Test configuration before run:
+apache2ctl configtest
 systemctl reload apache2
 ```
 **a2dissite:**
 > `a2disiste` is used to disable virtual host and remove the config file from `/sites-enabled/` path.
-```
-bash
+```bash
 a2dissite site.example.com
 ```
 
