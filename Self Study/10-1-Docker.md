@@ -36,7 +36,7 @@ systemctl status docker
 
 #### Use Docker without Sudo:
 ```sh
-sudo usermod -aG docker $USER # Add current User to docker Group
+usermod -aG docker $USER # Add current User to docker Group
 # Need to Logout & Login
 ```
 
