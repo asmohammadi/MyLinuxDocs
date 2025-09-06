@@ -1,7 +1,6 @@
 # Installing SSL (Let's Encrypt):
 
 ### Certbot:
-
 ```bash
 # Install for Nginx:
 apt install certbot python3-certbot-nginx
@@ -14,14 +13,12 @@ certbot --version
 ```
 
 ### Check DNS Records:
-
 ```bash
 dig +short example.com
 nslookup example.com
 ```
 
 ### Issue SSL for Nginx:
-
 ```bash
 certbot --nginx -d example.com -d www.example.com
 # Give Email address for renew SSL
@@ -30,27 +27,24 @@ certbot --nginx -d example.com -d www.example.com
 ```
 
 ### Issue SSL for Apache:
-
 ```bash
 certbot --apache -d example.com -d www.example.com
 # Give Email address for renew SSL
 # Agree term of service
 # Enable Redirect Http to Https
 ```
-> Now Apache Virtual Host will be edited
-> New block for 443 will be created.
-> The path of .pem certificates will added to file.
-> Https address wil be activated.
+* Now Apache Virtual Host will be edited
+* New block for 443 will be created.
+* The path of .pem certificates will added to file.
+* Https address wil be activated.
 
 ### Check & Test installed Certificates:
-
 ```bash
 certbot certificates
 # Display the path of Certificates
 # Display the expiration date of Certs
 # Display certificates Domain Names
 ```
-
 ```bash
 # Manual test:
 curl -I https://example.com
@@ -58,7 +52,6 @@ curl -I https://example.com
 HTTP/1.1 200 OK
 Redirect 301/302
 ```
-
 ```bash
 # Testing Certificates:
 openssl x509 -in /etc/letsencrypt/live/example.com/fullchain.pem -text -noout
@@ -83,11 +76,10 @@ all renewals succeeded
 
 3. Cron:
 ```bash
-sudo crontab -e
+crontab -e
 # Add this line:
 0 3 * * * certbot renew --quiet # Every day at 03:00 AM
 ```
-
 
 #### Create hook to reload Nginx after Renew:
 ```bash
@@ -107,7 +99,7 @@ chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
 * `Issue Limit` : 5 SSL per week for each Domain
 * `Subdomains` : Up to 100
 * `Wildcard` : No Wildcard
-* `Security` : Certficates must be in path `/etc/letsencrypt/live/`. Only Root have permission.
+* `Security` : Certificates must be in path `/etc/letsencrypt/live/`. Only Root have permission.
 
 
  

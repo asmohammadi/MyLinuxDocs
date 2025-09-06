@@ -18,7 +18,7 @@ apt install certbot python3-certbot-nginx.
 (e.g., /etc/apache2/sites-available/example.com.conf). 
 # Ensure the ServerName and ServerAlias directives are correctly set. 
 # Enable the site and required modules:
-a2ensite example.com and sudo a2enmod ssl. 
+a2ensite example.com && a2enmod ssl
 # Test and reload Apache:
 apache2ctl configtest
 systemctl reload apache2. 
@@ -30,15 +30,15 @@ certbot --apache -d example.com -d www.example.com
 # For Nginx:
 certbot --nginx -d example.com -d www.example.com
 ```
-> Certbot will guide you through the process, including prompting for your email and agreeing to the terms of service. 
-> Note that you will need to allow HTTP traffic (port 80) for the initial verification by Let's Encrypt. 
+* Certbot will guide you through the process, including prompting for your email and agreeing to the terms of service. 
+* Note that you will need to allow HTTP traffic (port 80) for the initial verification by Let's Encrypt. 
 
 5. Set up `automatic renewal`:
 
-> Certbot automatically configures a cron job or systemd timer to renew your certificates before they expire (usually every 90 days). 
+* Certbot automatically configures a cron job or systemd timer to renew your certificates before they expire (usually every 90 days). 
 
-You can test the renewal process with
 ```bash
+# Test the renewal process:
 certbot renew --dry-run. 
 ```
 
@@ -52,8 +52,8 @@ certbot renew --dry-run.
 
 > Ensure port 80 (for initial verification) and 443 (for HTTPS) are open in your firewall.
 ```bash
-sudo ufw allow 80
-sudo ufw allow 443
+ufw allow 80
+ufw allow 443
 ```
 
 #### Domain validation:
