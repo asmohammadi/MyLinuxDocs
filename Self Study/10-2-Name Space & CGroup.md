@@ -27,6 +27,12 @@
 
 ### Namespace Management:
 ```sh
+lsns # Display Namespace
+unshare # Create Namespace
+nsenter # Connect to Namespace
+ip netns # NET Namespace management
+```
+```sh
 # List Namespaces:
 lsns
 # Show namespace of specific process:
@@ -41,10 +47,18 @@ unshare --net --pid --mount --uts --ipc --fork /bin/bash # New Shell with isolat
 # Connect to a namespace:
 nsenter --target 1234 --net # Connect to Net namespace with PID
 ```
+
+### Namespace Management in Docker:
 ```sh
 # In Docker:
-docker inspect --format '{{.State.Pid}}' mycontainer
+docker inspect --format '{{.State.Pid}}' mycontainer # Find PID of a container
 ls -l /proc/<PID>/ns/
+
+# Display the Namespaces of a container:
+ls -l /proc/$(docker inspect --format '{{.State.Pid}}' <container_name>)/ns/
+
+# Connect to Namespace of a container:
+nsenter --target $(docker inspect --format '{{.State.Pid}}' <container_name>) --net
 ```
 
 ### CGroup Management:
@@ -70,6 +84,12 @@ echo <PID> | sudo tee /sys/fs/cgroup/memory/test/cgroup.procs
 # Create new CGroup:
 mkdir /sys/fs/cgroup/mygroup
 
+# Limit Memory:
+echo 100M | sudo tee /sys/fs/cgroup/mygroup/memory.max
+
+# Unlimit Memory:
+echo max | sudo tee /sys/fs/cgroup/mygroup/memory.max
+
 # Limit CPU to 20%:
 echo "20000 100000" | sudo tee /sys/fs/cgroup/mygroup/cpu.max
 
@@ -77,20 +97,27 @@ echo "20000 100000" | sudo tee /sys/fs/cgroup/mygroup/cpu.max
 echo <PID> | sudo tee /sys/fs/cgroup/mygroup/cgroup.procs
 ```
 
-### Namespace & CGroup Management with SystemD:
+### CGroup Management with SystemD:
 ```sh
 # Memory limitation on a service:
 systemctl set-property nginx.service MemoryMax=500M
 systemctl set-property nginx.service CPUQuota=50%
+
+# Display limitations:
+systemctl show -p MemoryMax nginx.service
+systemctl show -p CPUQuota nginx.service
 ```
 
-### Namespace & CGroup Management in Docker:
+### CGroup Management in Docker:
 ```sh
 # Memory limitation:
 docker run -m 512m --memory-swap 1g ubuntu
 
 # CPU limitation:
 docker run --cpus="2" ubuntu
+
+# I/O limitation:
+docker run --device-read-bps /dev/sda:1mb --device-write-bps /dev/sda:1mb ubuntu
 
 # Resource management:
 docker inspect <container_id> | grep -i cgroup
