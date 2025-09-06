@@ -26,7 +26,7 @@ services:
 
 ### Bridge Network:
 
-> In `Bride` network, containers can connect to each other but by default have no connection to Host.
+> In `Bridge` network, containers can connect to each other but by default have no connection to Host.
 > We can use port-forward to connect to Host.
 
 ```yml
@@ -147,7 +147,7 @@ services:
       - "8080:80"
     volumes:
       - nginx_logs:/var/log/nginx
-    deploy: # This section will use in Docker Swarm
+    deploy: # This section using in Docker Swarm
       resources:
         limits:
           cpus: '0.5'
