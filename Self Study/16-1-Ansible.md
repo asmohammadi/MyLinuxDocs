@@ -103,10 +103,10 @@ ansible -i inventory.ini local -m ping
 ```ini
 [defaults]
 inventory = inventory.ini
-remote_user = ubuntu
+remote_user = admin_ssh
 host_key_checking = False
 retry_files_enabled = False
-timeout = 30
+timeout = 60
 
 [privilege_escalation]
 become = True
@@ -127,9 +127,5 @@ become_user = root
 * Keeps project configurations isolated
 * Avoids repeating CLI options (-i, -u, etc.)
 * Ensures consistent behavior across team members or scripts
-
-
-
-
 
 

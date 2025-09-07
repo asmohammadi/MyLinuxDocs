@@ -47,7 +47,7 @@ ansible-playbook -i inventory.ini install-nginx.yml --ask-become-pass # Without 
 1. Inventory:
 ```ini
 [webservers]
-192.168.100.10 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+192.168.100.10 ansible_user=admin_ssh ansible_ssh_private_key_file=~/.ssh/id_rsa
 ```
 2. Playbook Yaml file:
 ```yaml
@@ -141,11 +141,5 @@ ansible-lab/
         name: nginx
         state: restarted
 ```
-
-
-
-
-
-
 
 

@@ -1,6 +1,6 @@
 # Ansible Playbook Sample
 
-## Sample Playbook: Install and configuring a Secure Web Server
+## Sample Playbook: Install and configuring a Secure Web Server remotely:
 
 **Scenario:**
 * Create User
@@ -24,6 +24,10 @@ ansible-lab/
 │       └── example.com.key
 └── templates/
     └── nginx_ssl.conf.j2
+```
+```ini
+[webservers]
+192.168.100.10 ansible_user=admin_ssh ansible_ssh_private_key_file=~/.ssh/id_rsa
 ```
 ```yaml
 # Secure-WebServer-With-Custom-SSL.yml:
@@ -123,7 +127,7 @@ ansible-lab/
 server {
     listen 80;
     server_name {{ domain_name }};
-    return 301 https://$host$request_uri;
+    return 301 https://$host$request_uri; # Redirect HTTP to HTTPS
 }
 
 server {
@@ -142,10 +146,5 @@ server {
     }
 }
 ```
-
-
-
-
-
 
 
