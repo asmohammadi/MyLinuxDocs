@@ -115,6 +115,28 @@ KiB Swap:  1045500 total,   448216 free,   597284 used.   256968 avail Mem
 * `si` : Software interupt
 * `st` : 
 
+Here’s a breakdown of what the top output means 👇
+📊 CPU Section
+* `us` → % of CPU used by user processes (apps/programs).
+* `sy` → % of CPU used by system (kernel tasks).
+* `ni` → % of CPU used by processes with changed priority (nice value).
+* `id` → % of CPU that is idle (higher = system is free).
+* `wa` → % of CPU waiting for I/O (disk/network).
+* `hi` → % of CPU handling hardware interrupts.
+* `si` → % of CPU handling software interrupts.
+* `st` → % of CPU stolen by virtual machines (important in cloud/VM setups).
+⚙️ Process States
+Tasks: Shows total processes.
+* `running` → processes actively using CPU.
+* `sleeping` → idle but waiting for resources.
+* `stopped` → paused.
+* `zombie` → finished but not cleaned up by parent process.
+🖥 Memory Section
+* `VIRT` → Virtual memory used by a process (all it can access).
+* `RES` → Resident memory (physical RAM actually used).
+* `SHR` → Shared memory with other processes.
+* `%MEM` → How much of RAM this process is using.
+
 **Short Keys**:
 * `d` : Set delay time for refresh
 * `z` : Set colour
