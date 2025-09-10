@@ -60,6 +60,33 @@ PUT /products # Create an index(Table)
 GET /_cat/indices # List indexes
 GET /_cat/nodes # List Elastics nodes (servers)
 GET /_cat/health # Check node health
+DELETE /products # Delete index
+GET /product/_search # List all data in an index
+```
+### Create Index & Document:
+```sh
+# Create a document in product index with ID 1:
+POST /product/_doc/1
+{
+  "name":"Phone",
+  "qty":250,
+  "price":"500000",
+  "cat":"digital"
+}
+GET /product/_doc/1 # List document with ID 
+```
+
+### Update Document:
+```sh
+# Update a document in index with ID:
+POST /product/_update/1
+{
+  "doc": {
+      "qty":150,
+  }
+}
+```
+
 
 
 
