@@ -56,11 +56,11 @@ volumes:
 
 ### ElasticSearch Commands:
 ```sh
-PUT /products # Create an index(Table)
+PUT /product # Create an index(Table)
 GET /_cat/indices # List indexes
 GET /_cat/nodes # List Elastics nodes (servers)
 GET /_cat/health # Check node health
-DELETE /products # Delete index
+DELETE /product # Delete index
 GET /product/_search # List all data in an index
 ```
 ### Create Index & Document:
@@ -86,6 +86,56 @@ POST /product/_update/1
   }
 }
 ```
+
+### Add Multiple Documents in Index:(Bulk Insert)
+```sh
+PUT /products
+POST /products_bulk
+{"index":{"_id":100}}
+{"name":"product1","price":150000,"qty":20}
+{"index":{"_id":101}}
+{"name":"product2","price":250000,"qty":30}
+```
+
+### Mapping:
+
+**data types (Field Types)** : Types of variable
+* `text` : for text
+* `keyword`: for exact words
+* `integer`, `long`, `float` : for number
+* `boolean` : for true/false
+* `date` : for date
+* `object` : for array or complicated json
+* `nested` : for array, better than `object`
+
+**Dynamic Map:**
+* Insert data without field types
+* Field type will detect automatically
+
+```sh
+GET /products/_mapping # Display mappings
+```
+
+### Meta Field:
+```sh
+GET /products/_doc/100
+# Result:
+{
+  "_index": "products",
+  "-id": 100,
+  "_version": 1,
+  "_seq_no": 0,
+  "_primary_term": 1,
+  "found": true,
+  "_source": {
+   "price": 150000,
+   "qty": 20,
+   "name": "product1
+  }
+}
+```
+
+
 
 
 
