@@ -190,6 +190,21 @@ PUT /products/
 }
 ```
 
+### Analyzer:
+> `Analyze` is a process in which ElasticSearch transforms the data into a searchable form in ElasticSearch.
+
+**Steps of Analyzing:**
+1. `Character Filters` : Removing extra characters
+2. `Tokenizer` : Removing characters which has no meaning
+3. `Token Filters` : Transform uppercase characters into lowercase
+
+```sh
+# Example of analyzing:
+<strong>Two</strong> words! -> Two words! # Character Filter
+Two words! -> [Two, words] # Tokenizer
+[Two, words] ->  [two, words] # Token Filters
+```
+
 
 
 
