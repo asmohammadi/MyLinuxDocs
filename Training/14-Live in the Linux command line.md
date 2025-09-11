@@ -3,7 +3,8 @@
 ### Echo Examples:
 ```bash
 root@server:~# echo -n devops linux
-devops linuxroot@server:~# echo -e devops linux
+devops linux
+root@server:~# echo -e devops linux
 devops linux
 root@server:~# echo -e "devops \n linux"
 devops
