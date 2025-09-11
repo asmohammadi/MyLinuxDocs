@@ -167,6 +167,18 @@ PUT /products/
 }
 ```
 
+### Mapping Parameters:
+* `dynamic` : True/False => Disable/Enable Dynamic Mapping
+* `copy_to` : Field: FirstName , Field: LastName => Field: FullName = FirstName + LastName
+* `coerce` : Field: integer => تبدیل به عدد صحیح می کند
+    - "coerce": false => Disable it
+* `format` : Date format
+    - "type":"date,
+    - "format":"yyyy-mm-dd"
+* `null_value` : "null_value":0 => Don't let the data to be null. Null data must have value.
+* `norms` : True/False. Give score to data when searching.
+
+
 
 
 
