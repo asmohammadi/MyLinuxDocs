@@ -174,11 +174,21 @@ PUT /products/
     - "coerce": false => Disable it
 * `format` : Date format
     - "type":"date,
-    - "format":"yyyy-mm-dd"
+    - "format":"yyyy/MM/dd HH:mm:ss||yyyy/MM/dd"
 * `null_value` : "null_value":0 => Don't let the data to be null. Null data must have value.
 * `norms` : True/False. Give score to data when searching.
 
-
+### Multi Field:
+```sh
+"name": {
+    "type": "text",
+    "fields": {
+        "keyword": {
+            "type": "keyword"
+        }
+    }
+}
+```
 
 
 
