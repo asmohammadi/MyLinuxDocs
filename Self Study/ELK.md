@@ -415,6 +415,42 @@ GET /_search
 * `TF/IDF` : Score based on repeated terms in document or Index. `TF` Give more score based on the amount of terms in document. `IDF` Give low score based on the amount of terms in Index.
 * `OKAPI/BM25` : Give score based on standards & principals.
 
+### Query Filter:
+> Using for test, description, words, ...
+> Query Filter has relevancy.
+> Query using for `include`.
+
+```sh
+# Example for include or full text search:
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "description": "Asghar"
+    }
+  }
+}
+```
+
+### Term Match:
+> Used for date, time, numbers, ...
+> Term using for `exact`.
+
+```sh
+# Example for Exact search:
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "description": {
+      "value": "asghar"
+      }
+    }
+  }
+}
+```
+
+
 
 
 
