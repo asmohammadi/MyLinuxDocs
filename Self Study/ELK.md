@@ -205,7 +205,134 @@ Two words! -> [Two, words] # Tokenizer
 [Two, words] ->  [two, words] # Token Filters
 ```
 
+### Analyzing Sample:
+```sh
+POST _analyze
+{
+    "tokenizer": "standard",
+    "text": "I'm in the mood for "
+}
+POST _analyze
+{
+    "filter": ["lowercase"],
+    "text": <p>"I'm</p> in the mood for"
+}
+POST _analyze
+{
+    "char_filter": ["html_strip"],
+    "text": <p>"I'm</p> in the mood for"    
+}
+```
 
+### ElasticSearch Character Filters:
+
+**Character filter reference:**
+> Character filters are used to preprocess the stream of characters before it is passed to the tokenizer.
+
+> A character filter receives the original text as a stream of characters and can transform the stream by adding, removing, or changing characters. For instance, a character filter could be used to convert Hindu-Arabic numerals (٠١٢٣٤٥٦٧٨٩) into their Arabic-Latin equivalents (0123456789), or to strip HTML elements like <b> from the stream.
+
+> Elasticsearch has a number of built in character filters which can be used to build custom analyzers.
+
+* `HTML Strip Character Filter` :
+The html_strip character filter strips out HTML elements like <b> and decodes HTML entities like &amp;.
+* `Mapping Character Filter` :
+The mapping character filter replaces any occurrences of the specified strings with the specified replacements.
+* `Pattern Replace Character Filter` :
+The pattern_replace character filter replaces any characters matching a regular expression with the specified replacement.
+
+### ElasticSearch Built in Tokenizers:
+
+**Word Oriented Tokenizers:**
+> The following tokenizers are usually used for tokenizing full text into individual words:
+* `Standard Tokenizer` :
+The standard tokenizer divides text into terms on word boundaries, as defined by the Unicode Text Segmentation algorithm. It removes most punctuation symbols. It is the best choice for most languages.
+* `Letter Tokenizer` :
+The letter tokenizer divides text into terms whenever it encounters a character which is not a letter.
+* `Lowercase Tokenizer` :
+The lowercase tokenizer, like the letter tokenizer, divides text into terms whenever it encounters a character which is not a letter, but it also lowercases all terms.
+* `Whitespace Tokenizer` :
+The whitespace tokenizer divides text into terms whenever it encounters any whitespace character.
+* `UAX URL Email Tokenizer` :
+The uax_url_email tokenizer is like the standard tokenizer except that it recognises URLs and email addresses as single tokens.
+* `Classic Tokenizer` :
+The classic tokenizer is a grammar based tokenizer for the English Language.
+* `Thai Tokenizer` :
+The thai tokenizer segments Thai text into words.
+
+**Partial Word Tokenizers:**
+> These tokenizers break up text or words into small fragments, for partial word matching:
+
+* `N-Gram Tokenizer` :
+The ngram tokenizer can break up text into words when it encounters any of a list of specified characters (e.g. whitespace or punctuation), then it returns n-grams of each word: a sliding window of continuous letters, e.g. quick → [qu, ui, ic, ck].
+* `Edge N-Gram Tokenizer` :
+The edge_ngram tokenizer can break up text into words when it encounters any of a list of specified characters (e.g. whitespace or punctuation), then it returns n-grams of each word which are anchored to the start of the word, e.g. quick → [q, qu, qui, quic, quick].
+
+**Structured Text Tokenizers:**
+> The following tokenizers are usually used with structured text like identifiers, email addresses, zip codes, and paths, rather than with full text:
+
+* `Keyword Tokenizer` :
+The keyword tokenizer is a noop tokenizer that accepts whatever text it is given and outputs the exact same text as a single term. It can be combined with token filters like lowercase to normalise the analysed terms.
+* `Pattern Tokenizer` :
+The pattern tokenizer uses a regular expression to either split text into terms whenever it matches a word separator, or to capture matching text as terms.
+* `Simple Pattern Tokenizer` :
+The simple_pattern tokenizer uses a regular expression to capture matching text as terms. It uses a restricted subset of regular expression features and is generally faster than the pattern tokenizer.
+* `Char Group Tokenizer` :
+The char_group tokenizer is configurable through sets of characters to split on, which is usually less expensive than running regular expressions.
+* `Simple Pattern Split Tokenizer` :
+The simple_pattern_split tokenizer uses the same restricted regular expression subset as the simple_pattern tokenizer, but splits the input at matches rather than returning the matches as terms.
+* `Path Tokenizer` :
+The path_hierarchy tokenizer takes a hierarchical value like a filesystem path, splits on the path separator, and emits a term for each component in the tree, e.g. /foo/bar/baz → [/foo, /foo/bar, /foo/bar/baz ].
+
+### ElasticSearch Token Filters:
+
+* Apostrophe
+* ASCII folding
+* CJK bigram
+* CJK width
+* Classic
+* Common grams
+* Conditional
+* Decimal digit
+* Delimited payload
+* Dictionary decompounder
+* Edge n-gram
+* Elision
+* Fingerprint
+* Flatten graph
+* Hunspell
+* Hyphenation decompounder
+* Keep types
+* Keep words
+* Keyword marker
+* Keyword repeat
+* KStem
+* Length
+* Limit token count
+* Lowercase
+* MinHash
+* Multiplexer
+* N-gram
+* Normalization
+* Pattern capture
+* Pattern replace
+* Phonetic
+* Porter stem
+* Predicate script
+* Remove duplicates
+* Reverse
+* Shingle
+* Snowball
+* Stemmer
+* Stemmer override
+* Stop
+* Synonym
+* Synonym graph
+* Trim
+* Truncate
+* Unique
+* Uppercase
+* Word delimiter
+* Word delimiter graph
 
 
 
