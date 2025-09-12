@@ -356,6 +356,64 @@ GET /products/_search?q=attribute:*
 GET /products/_search?q=name:NAME AND description:2
 ```
 
+**DSL (Domain Specific Language) Search:**
+* `Leaf` : Simple search query
+* `Compound` : Complicated search query.
+  - `Boolean` : Multiple search queries.
+
+```sh
+# Example1:
+GET /products/_search
+{
+  "query": {
+    "match_all": {
+
+    }
+  }
+}
+```
+```sh
+# Example2:
+GET /_search
+{
+  "query": {
+    "query_string": {
+      "query": "(new york city) OR (big apple)",
+      "default_field": "content"
+    }
+  }
+}
+```
+```sh
+# Example3:
+GET /_search
+{
+    "bool": {
+        "must":     { "match": "fox"         },
+        "should":   { "match": "quick brown" },
+        "must_not": { "match": "news"        }
+    }
+}
+```
+```sh
+# Example4:
+GET /_search
+{
+  "query": {
+    "query_string": {
+      "fields": [ "content", "name" ],
+      "query": "this AND that"
+    }
+  }
+}
+```
+
+### Relevancy:
+> A way of giving score to data which has been searched.
+
+**Relevancy Algorithms:**
+* `TF/IDF` : Score based on repeated terms in document or Index. `TF` Give more score based on the amount of terms in document. `IDF` Give low score based on the amount of terms in Index.
+* `OKAPI/BM25` : Give score based on standards & principals.
 
 
 
