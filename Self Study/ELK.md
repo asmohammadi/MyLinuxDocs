@@ -334,6 +334,29 @@ The path_hierarchy tokenizer takes a hierarchical value like a filesystem path, 
 * Word delimiter
 * Word delimiter graph
 
+### Searching:
+* `DSL` : Query DSL is a full-featured JSON-style query language that enables complex searching, filtering, and aggregations.
+* `URI` : Query params 
+
+**Bulk Add:**
+```sh
+POST _bulk
+{"index": ....
+    ....
+}
+```
+**URI Search:**
+```sh
+GET /products/_search?q=*
+GET /products/_search?q=name:*
+GET /products/_search?q=name:NAME
+GET /products/_search?q=tag:NAME
+GET /products/_search?q=attribute:NAME
+GET /products/_search?q=attribute:*
+GET /products/_search?q=name:NAME AND description:2
+```
+
+
 
 
 
