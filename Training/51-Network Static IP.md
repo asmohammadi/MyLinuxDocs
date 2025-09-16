@@ -25,23 +25,26 @@ network:
         ens36:
             dhcp4: true
         ens37:
-            dhcp4: no
-                addresses:
-                    - 192.168.64.100/24
-                # gateway4: 192.168.64.1
-                nameservers:
-                    addresses: [8.8.8.8, 1.1.1.1]
+            dhcp4: false
+            addresses:
+                - 192.168.64.100/24
+            # gateway4: 192.168.64.1 (Deprecated but accepted)
+            nameservers:
+                addresses: [8.8.8.8, 1.1.1.1]
+            routes:
+                - to: default
+                  via: 192.168.64.1
         ens38:
             dhcp4: no
-                addresses:
-                    - 192.168.64.200/24
-                route:
-                    - to: 172.16.00/24
-                    - via: 192.168.1.1
-                    - to: default
-                    - via: 192.168.1.1
-                nameservers:
-                    addresses: [8.8.8.8, 1.1.1.1]
+            addresses:
+                - 192.168.64.200/24
+            route:
+                - to: 172.16.00/24
+                - via: 192.168.1.1
+                - to: default
+                - via: 192.168.1.1
+            nameservers:
+                addresses: [8.8.8.8, 1.1.1.1]
     version: 2
 ~
 ```
