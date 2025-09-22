@@ -2,6 +2,7 @@
 
 ### Files Structure:
 ```sh
+# Example 1:
 ansible-lab/
 ├── ansible.cfg
 ├── inventory.ini
@@ -33,6 +34,40 @@ ansible-lab/
         └── dir/
             └── file
 ```
+```sh
+# Example 1:
+ansible-dir/
+├── group_vars/
+│   ├── all
+│   ├── log
+│   └── web
+├── host_vars/
+│   ├── host1.west
+│   ├── host2.west
+│   ├── host3.west
+│   └── host4.west
+├── inventory/
+│   ├── dc-west.hosts
+│   ├── dc-east.hosts
+│   └── dc-north.hosts
+├── playbooks/
+│   ├── db.yml
+│   ├── default.yml
+│   ├── pre-install.yml
+│   ├── sudoer.yml
+│   └── web.yml
+├── roles/
+│   ├── app
+│   ├── firewall
+│   ├── git
+│   ├── log
+│   ├── mysql
+│   ├── nginx
+│   └── ssh
+├── vars
+└── ansible.cfg
+```
+
 
 ### Inventory Structure:
 * `inventory.ini`
@@ -101,11 +136,5 @@ app:
   hosts:
     host5:
 ```
-
-
-
-
-
-
 
 
