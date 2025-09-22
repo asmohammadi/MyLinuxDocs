@@ -2,9 +2,9 @@
 
 ```sh
 bash netstat.sh
+watch -n1 -d "bash netstat.sh | grep -E -i 'syn|flow|drop'"
 ss -ltn
 bash ss.sh
-watch -n1 -d "bash netstat.sh | grep -E -i 'syn|flow|drop'"
 ```
 ```sh
 sysctl -a | grep -E -i "somax|syn_backlog|cook"
