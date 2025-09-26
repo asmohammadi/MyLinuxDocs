@@ -62,12 +62,25 @@ ansible-dir/
 │   ├── git
 │   ├── log
 │   ├── mysql
+│   │   ├── defaults
+│   │   ├── handlers
+│   │   ├── tasks
+│   │   │   ├── database.yml
+│   │   │   ├── main.yml
+│   │   │   └── users.yml
+│   │   └── templates
 │   ├── nginx
+│   │   ├── defaults
+│   │   ├── files
+│   │   ├── tasks
+│   │   └── templates
+│   │       └── etc 
+│   │           └── nginx
+│   │               └── nginx.conf
 │   └── ssh
 ├── vars
 └── ansible.cfg
 ```
-
 
 ### Inventory Structure:
 * `inventory.ini`
