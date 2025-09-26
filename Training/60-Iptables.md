@@ -194,6 +194,31 @@ iptables -t nat -A POSTROUTING -o enp0ps3 -j MASQUERADE # Source NAT
 iptables -t filter -A FORWARD -i enp0s8 -j ACCEPT
 ```
 
+### Save Iptables Configuration:
+* `Temporary` : Save to a file (Not recommend)
+* `Permanent` : Using Cron (Not recommend)
+* `Permanent` : Using `iptables-persistent` Package
+```sh
+# Temporary (Not recommend):
+iptables-save > /path/file.txt # Save configuration as a text file
+iptables-restore < /path/file.txt # Restore configuration from a text file
+```
+```sh
+# Permanent with Cron (Not recommend):
+vim /etc/crontab # Add file.txt to Cron
+@reboot root iptables-restore < /path/file.txt
+```
+```sh
+# Permanent (Recommended):
+apt install iptables-persistent
+/etc/iptables/rules.v4 # Path of saved iptables configuration (Will restore at reboot)
+iptables-save > /etc/iptables/rules.v4 # Will restore after reboot
+# Apply changes without reboot:
+iptables-apply -t 10 /etc/iptables/rules.v4 # Apply change temporary, but wait 10 seconds to get confirmation, if no answer it will Rollback changes.
+```
+
+
+
 
 
 
