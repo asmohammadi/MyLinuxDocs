@@ -135,6 +135,78 @@ iptables -t filter -A INPUT -j DROP # Drop Everything Else
 iptables -t filter -A OUTPUT -j DROP # Drop Everything Else
 ```
 
+### User-defined Chain:
+* Creating Chain, instead of creating Rules.
+* Adding custom chains to the default chains.
+```sh
+# Create User-defined Chains:
+iptables -t filter -N SSH-IN
+iptables -t filter -N SSH-OUT
+# Create Rules in User-defined Chains:
+iptables -t filter -A SSH-IN -p tcp -s 192.168.0.0/24 --dport 22 -j ACCEPT
+iptables -t filter -A SSH-OUT -p tcp -d 192.168.0.0/24 --sport 22 -j ACCEPT
+# Inject User-defined Chains to default chains:
+iptables -t filter -I INPUT -j SSH-IN
+iptables -t filter -I OUTPUT -j SSH-OUT
+```
+
+### DNAT (IP Forwarding):
+> `Forwarding` means make the linux to be a `Router` to forward the packets.
+
+**Temporary Configuration:**
+```sh
+cat /proc/sys/net/ipv4/ip_forward # By default 0 (disable)
+echo 1 > /proc/sys/net/ipv4/ip_forward # Enable Forwarding
+```
+
+**Permanent Configuration:**
+```sh
+vim /etc/sysctl.conf
+net.ipv4.ip_forward=1
+sysctl -p # Apply changes
+```
+
+```sh
+# Destination NAT Rule:
+iptables -t nat -A PREROUTING -p tcp --dport 80 -d 192.168.178.95 -j DNAT --to-destination 192.168.178.101:80 
+iptables -t nat -A POSTROUTING -j MASQUERADE # For return
+```
+
+### SNAT (Source Nat):
+* Set IP & Gateway on Client (Gateway is Router)
+* Set IP & Gateway on Router Server (Gateway is Firewall outside)
+* Enable IP Forward on Router Server
+* 
+
+```sh
+# On client:
+vim /etc/netplan/50-cloud-init.yaml # Add IP & Gateway
+```
+```sh
+# On Router Server:
+vim /etc/netplan/50-cloud-init.yaml # Add IP & Gateway
+vim /etc/sysctl.conf # Enable IP Forward
+sysctl -p # Apply changes
+```
+```sh
+# Create Rules:
+iptables -t nat -A POSTROUTING -o enp0ps3 -j MASQUERADE # Source NAT
+iptables -t filter -A FORWARD -i enp0s8 -j ACCEPT
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
