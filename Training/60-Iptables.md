@@ -217,25 +217,31 @@ iptables-save > /etc/iptables/rules.v4 # Will restore after reboot
 iptables-apply -t 10 /etc/iptables/rules.v4 # Apply change temporary, but wait 10 seconds to get confirmation, if no answer it will Rollback changes.
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### IPSET:
+```sh
+apt install ipset
+ipset create blocked_ip hash:ip
+ipset list blocked_ip
+ipset add blocked_ip 192.168.178.101 # Add an IP to blocked_ip list
+ipset del blocked_ip 192.168.178.101
+```
+```sh
+# Add Created List to Iptables:
+iptables -t filter -I INPUT -m set --match-set blocked_ip src -j DROP
+iptables -t filter -D INPUT -m set --match-set blocked_ip src -j DROP # Delete Rule
+```
+```sh
+ipset create blocked_subnet hash:net
+ipset add blocked_subnet 10.0.0.0/8
+iptables -t filter -I INPUT -m set --match-set blocked_subnet src -j DROP
+```
+```sh
+ipset create blocked_ports hash:ip,port
+ipset add blocked_ports 192.168.178.101,80
+iptables -t filter -I INPUT -m set --match-set blocked_ports src,dst -j DROP
+```
+```sh
+ipset save > /opt/ipset.txt
+```
 
 
