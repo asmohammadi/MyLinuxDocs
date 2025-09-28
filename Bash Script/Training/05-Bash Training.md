@@ -38,11 +38,11 @@ read -p "give a number between 0 and 10: " number
 
 if [[ "$number" -ge 0 && "$number" -lt 10 ]]; then
 
-   echo "Number is correct and the inputed number is ${number}" 
+   echo "Number is correct and the inputted number is ${number}" 
    exit 0
 
 else 
-   echo "Number is not correct becuase ${number} is not between 0 and 10" >&2
+   echo "Number is not correct because ${number} is not between 0 and 10" >&2
    exit 1
 fi
 : ' 
@@ -67,8 +67,8 @@ if [[ ! -f "$path" || ! -r "$path" ]]; then
 fi
 
 
-# if the variable is empty then it will be true. there was an exclaimation mark(!) in the video which 
-# posed a problem because it made it flase
+# if the variable is empty then it will be true. there was an exclamation mark(!) in the video which 
+# posed a problem because it made it false
 # -n is also used but it comes handy when the var is null
 if [[ -n "$path" ]]; then
 
@@ -97,11 +97,11 @@ fi
 
 ### Hints to remember
 
-- you can use either `[[ ]]` or `[ ]` when checking for condition but ensure that you know the diffrence.
+- you can use either `[[ ]]` or `[ ]` when checking for condition but ensure that you know the difference.
 - when statement includes ||/-o the command will be executed if one of the conditions became True whereas when it comes to &&/-a both conditions must be True.
-- `-f` Unix operator, solely checks for regular files but `-e` checks for the existance of all files regardless of their type.
+- `-f` Unix operator, solely checks for regular files but `-e` checks for the existence of all files regardless of their type.
 - always use `exit integer` in your commands to call an exit systemcall and throw the exit code.
-- you can checkot this [tutorial ](https://www.tutorialspoint.com/unix/unix-basic-operators.htm#)to learn more about Unix operators.
+- you can checkout this [tutorial ](https://www.tutorialspoint.com/unix/unix-basic-operators.htm#)to learn more about Unix operators.
 
 ### Challenge Answer:
 ```sh
@@ -124,7 +124,7 @@ if [[ ! -f "$path" || ! -r "$path" ]]; then
     exit 1
 else
     echo $number > $path
-    echo "Awsome, here is the path to your number: ${path} "
+    echo "Awesome, here is the path to your number: ${path} "
     exit 0
 fi 
 ```
