@@ -37,9 +37,13 @@ ansible/
 ├── inventory
 │   └── main.yml
 ├── log
-│   └──  ansible.log
+│   └── ansible.log
 ├── playbooks
+│   └── default.yml
 ├── roles
+│   ├── default
+│   │    └── tasks
+│   │        └── main.yml
 │   ├── iptables
 │   ├── mysql
 │   ├── nginx
@@ -103,5 +107,38 @@ ansible -i db -a 'grep -i "^NAME=" /etc/os-release'
 ansible -i lb -a 'grep -i "^NAME=" /etc/os-release'
 ```
 * `all` : Group from inventory file
+
+### Role Example:
+```yml
+# ansible/roles/default/tasks/main.yml
+
+- name: Install git
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+```
+```yml
+# ansible/roles/default/tasks/main.yml
+# Loop: Install more packages
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - git
+    - htop
+```
+
+### Playbook Example:
+```yml
+# ansible/playbook/default.yml
+
+- name: default actions on all hosts
+  hosts: all
+  roles:
+    - default
+```
 
 
