@@ -131,14 +131,14 @@ ansible -i lb -a 'grep -i "^NAME=" /etc/os-release'
     - htop
 ```
 ```yml
-# ansible/roles/default/tasks/main.yml
+# ansible/playbook/default.yml
 # Install Using Shell: (Less detail)
 - name: Install packages with Shell
   shell: |
     apt update; apt install git htop sysstat tcpdump
 ```
 ```yml
-# ansible/roles/default/tasks/main.yml
+# ansible/playbook/default.yml
 # Create Directory:
 - name: Create directory
   file:
@@ -160,3 +160,64 @@ ansible -i lb -a 'grep -i "^NAME=" /etc/os-release'
 ansible-playbook playbook/default.yml --check # Check before running
 ansible-playbook playbook/default.yml --check --diff # Display changes
 ```
+
+### Variables:
+1. Using Shell
+2. Using Roles
+3. Using host_vars directory
+> Priority: Shell -> Roles -> host_vars
+
+#### 1. Using Shell:
+```yml
+# ansible/playbook/default.yml
+# Using Shell:
+- name: Echo variable to file
+  shell: |
+    echo {{ VARIABLE }} > /tmp/test/VARIABLE
+
+- name: Print variable
+  debug: 
+    msg: "{{ VARIABLE }}"
+```
+```sh
+ansible-playbook playbook/default.yml -e "VARIABLE=Test_CMD" # Set Variable in command
+```
+
+#### 2. Using Roles:
+```yml
+# ansible/roles/web/defaults/main.yml
+# Variable using Roles:
+VARIABLE="Var_Default_Role"
+```
+```sh
+ansible-playbook playbook/default.yml
+```
+
+#### 3. Using host_vars:
+> Priority: host_vars -> Specific group_vars -> all group_vars
+
+```yml
+# ansible/inventory/host_vars/app1.sudoer.net.yml
+# Variable using host_vars: (Just for APP1 Server)
+VARIABLE: "APP1 HOST VARS"
+```
+```sh
+# Structure:
+ansible/
+├── inventory
+│   ├── group_vars
+│   │   ├── all
+│   │   ├── app
+│   │   ├── db
+│   │   └── lb
+│   ├── host_vars
+│   │   ├── lb.sudoer.net
+│   │   ├── db.sudoer.net
+│   │   ├── app1.sudoer.net
+│   │   └── app2.sudoer.net
+│   └── main.yml
+```
+
+
+
+
