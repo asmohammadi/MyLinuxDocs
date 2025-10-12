@@ -130,6 +130,21 @@ ansible -i lb -a 'grep -i "^NAME=" /etc/os-release'
     - git
     - htop
 ```
+```yml
+# ansible/roles/default/tasks/main.yml
+# Install Using Shell: (Less detail)
+- name: Install packages with Shell
+  shell: |
+    apt update; apt install git htop sysstat tcpdump
+```
+```yml
+# ansible/roles/default/tasks/main.yml
+# Create Directory:
+- name: Create directory
+  file:
+    state: directory
+    path: "/tmp/test"
+```
 
 ### Playbook Example:
 ```yml
@@ -141,4 +156,7 @@ ansible -i lb -a 'grep -i "^NAME=" /etc/os-release'
     - default
 ```
 
-
+```sh
+ansible-playbook playbook/default.yml --check # Check before running
+ansible-playbook playbook/default.yml --check --diff # Display changes
+```
