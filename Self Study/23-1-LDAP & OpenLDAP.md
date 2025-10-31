@@ -68,10 +68,10 @@ ldapdelete # Delete User
 * `-h` : Set OpenLDAP Host
 * `-x` : Simple authentication (like anonymous login)
 * `-b` : Define base
-* `-D` : Define distinguished name
+* `-D` : Define distinguished name of the admin user
 * `-W` : Request password
-* `-w` : Define password
-* `-f` : Define file
+* `-w` : Type password
+* `-f` : Define file for password
 * `-S` : Define user
 ```sh
 ldapsearch -h localhost -x -D cn=admin,dc=domain,dc=com -W -b dc=domain,dc=com 
