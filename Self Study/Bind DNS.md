@@ -66,7 +66,7 @@ zone    "domain.net" {
         masters { 192.168.1.10; };
 };
 zone    "1.168.192.in-addr.arpa" {
-        type    master;
+        type    slave;
         file "etc/bind/db.1.168.192";
 };
 ```

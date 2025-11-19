@@ -23,7 +23,7 @@ Kyourdomain.com.+008+26450.key
 Kyourdomain.com.+008+26450.private
 
 # Create ZSK(Zone Signing Key):
-dnssec-keygen -a RSASHA256 -b 1024 yourdomain.com
+dnssec-keygen -a RSASHA256 -b 2048 yourdomain.com
 # Output:
 Kyourdomain.com.+008+50959.key
 Kyourdomain.com.+008+50959.private
@@ -46,7 +46,7 @@ dnssec-signzone -A -3 $(head -c 1000 /dev/random | sha1sum | cut -b 1-16) \
 db.yourdomain.com.signed
 ```
 ```sh
-# Change zone file confiuration:
+# Change zone file configuration:
 vim /etc/bind/named.conf.local
 
 zone "yourdomain.com" {
