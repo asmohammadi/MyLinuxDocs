@@ -66,6 +66,16 @@ ls /lib/modules/
 make install # Will do dracut process
 reboot
 ```
+```sh
+make -j$(nproc) bzImage # Create kernel image using all CPU cores
+cp /boot/config-$(uname -r) .config # Copy the current kernel .config file
+yes "" | make oldconfig # Sync configs with new config, Answer Yes for all questions
+```
+
+
+
+
+
 
 
 
